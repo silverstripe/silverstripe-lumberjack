@@ -14,5 +14,8 @@
 			"name": "Michael Strong",
 			"email": "mstrong@silverstripe.org"
 		}
-	]
+	],
+	"replace": {
+		"micmania1/silverstripe-lumberjack": "*"
+	}
 }
