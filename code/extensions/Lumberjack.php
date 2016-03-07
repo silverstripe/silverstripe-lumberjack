@@ -37,7 +37,8 @@ class Lumberjack extends SiteTreeExtension {
 	public function updateCMSFields(FieldList $fields) {
 		$excluded = $this->owner->getExcludedSiteTreeClassNames();
 		if(!empty($excluded)) {
-			$pages = SiteTree::get()->filter(array(
+			$childClassName = $this->getChildClassName();
+			$pages = $childClassName::get()->filter(array(
 				'ParentID' => $this->owner->ID,
 				'ClassName' => $excluded
 			));
@@ -47,7 +48,6 @@ class Lumberjack extends SiteTreeExtension {
 				$pages,
 				$this->getLumberjackGridFieldConfig()
 			);
-
 			$tab = new Tab('ChildPages', $this->getLumberjackTitle(), $gridField);
 			$fields->insertAfter($tab, 'Main');
 		}
@@ -145,6 +145,22 @@ class Lumberjack extends SiteTreeExtension {
 		$controller = Controller::curr();
 		return $controller instanceof LeftAndMain
 			&& in_array($controller->getAction(), array("treeview", "listview", "getsubtree"));
+	}
+
+	/**
+	 * Checks config for a specified child_classname on the class extending Lumberjack.
+	 * Uses SiteTree if none found in config.
+	 *
+	 * @return string
+	 */
+	protected function getChildClassName() {
+		$childClassName = "SiteTree";
+		if ($childClassNameConfig = Config::inst()->get($this->owner->ClassName, 'child_classname')) {
+			if (class_exists($childClassNameConfig)) {
+				$childClassName = $childClassNameConfig;
+			}
+		}
+		return $childClassName;
 	}
 
 }
