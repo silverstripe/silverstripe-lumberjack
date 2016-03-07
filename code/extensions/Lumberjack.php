@@ -155,7 +155,7 @@ class Lumberjack extends SiteTreeExtension {
 	 */
 	protected function getChildClassName() {
 		$childClassName = "SiteTree";
-		if ($childClassNameConfig = Injector::inst()->create($this->owner->ClassName)->config()->child_classname) {
+		if ($childClassNameConfig = Config::inst()->get($this->owner->ClassName, 'child_classname')) {
 			if (class_exists($childClassNameConfig)) {
 				$childClassName = $childClassNameConfig;
 			}
