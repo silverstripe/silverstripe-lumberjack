@@ -68,6 +68,31 @@ the `SiteTree` or `Page` class.
 	BlogEntry:
 	  show_in_sitetree: false
 	
+### Sorting and Filtering
 
+By default all children in Lumberjack GridField are sorted by SiteTree default `Sort` and can be filtered by their `Title`. This is restrictive but neccessary because there can be multiple different child classes and these are the values they all have in common.
+
+If you are only using one single child class in a Lumberjack Gridfield you can overcome this restriction by setting the `$child classname` to the class extending Lumberjack via config.
+This will enable the following functionality:
+* `$default_sort` of child class is picked up
+* `GridFieldSortableHeader` will work with all variables of the child class
+* `GridFieldFilterHeader`will work with all variables of the child class
+
+Add the `$child_classname` value to the class extending Lumberjack via `config.yml`:
+
+```yml
+NewsHolder:
+  extensions:
+    - Lumberjack
+  child_classname: 'NewsPage'
+```
+or via static variable inside the extended Class:
+
+```php
+class NewsHolder extends Page {
+  private static $extensions = array('Lumberjack');
+  private static $child_classname = 'NewsPage'
+}
+```
 
 
