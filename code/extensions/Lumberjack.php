@@ -40,16 +40,32 @@ class Lumberjack extends SiteTreeExtension
     {
         $excluded = $this->owner->getExcludedSiteTreeClassNames();
         if (!empty($excluded)) {
-            $pages = SiteTree::get()->filter(array(
-                'ParentID' => $this->owner->ID,
-                'ClassName' => $excluded
-            ));
-            $gridField = new GridField(
-                "ChildPages",
-                $this->getLumberjackTitle(),
-                $pages,
-                $this->getLumberjackGridFieldConfig()
-            );
+            $pagesFiltered = array();
+			$pages = SiteTree::get()->filter(array(
+				'ParentID' => $this->owner->ID,
+				'ClassName' => $excluded
+			));
+			foreach ($pages as $page) {
+				$pagesFiltered[$page->ID] = $page;
+			}
+			// Query pages that exist on *_Live table but not draft (Less of an issue in 3.2+)
+			$livePages = $pages->setDataQueryParam(array(
+				'Versioned.mode' => 'stage',
+				'Versioned.stage' => 'Live'
+			));
+			foreach ($livePages as $page) {
+				$pagesFiltered[$page->ID] = $page;
+			}
+
+			// Fallback to $pages DataList if empty so that the dataClass() can properly be determined
+			$pagesFiltered = ($pagesFiltered) ? new ArrayList($pagesFiltered) : $pages;
+
+			$gridField = new GridField(
+				"ChildPages",
+				$this->getLumberjackTitle(),
+				$pagesFiltered,
+				$this->getLumberjackGridFieldConfig()
+			);
 
             $tab = new Tab('ChildPages', $this->getLumberjackTitle(), $gridField);
             $fields->insertAfter($tab, 'Main');
