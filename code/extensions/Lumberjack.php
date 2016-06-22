@@ -40,34 +40,36 @@ class Lumberjack extends SiteTreeExtension
     {
         $excluded = $this->owner->getExcludedSiteTreeClassNames();
         if (!empty($excluded)) {
-            $pagesFiltered = array();
-			$pages = SiteTree::get()->filter(array(
-				'ParentID' => $this->owner->ID,
-				'ClassName' => $excluded
-			));
-			foreach ($pages as $page) {
-				$pagesFiltered[$page->ID] = $page;
-			}
-			// Query pages that exist on *_Live table but not draft (Less of an issue in 3.2+)
-			$livePages = $pages->setDataQueryParam(array(
-				'Versioned.mode' => 'stage',
-				'Versioned.stage' => 'Live'
-			));
-			foreach ($livePages as $page) {
-				$pagesFiltered[$page->ID] = $page;
-			}
-
-			// Fallback to $pages DataList if empty so that the dataClass() can properly be determined
-			$pagesFiltered = ($pagesFiltered) ? new ArrayList($pagesFiltered) : $pages;
-
-			$gridField = new GridField(
-				"ChildPages",
-				$this->getLumberjackTitle(),
-				$pagesFiltered,
-				$this->getLumberjackGridFieldConfig()
-			);
+            $pages = SiteTree::get()->filter(array(
+                'ParentID' => $this->owner->ID,
+                'ClassName' => $excluded
+            ));
+            $gridField = new GridField(
+                "ChildPages",
+                $this->getLumberjackTitle(),
+                $pages,
+                $this->getLumberjackGridFieldConfig()
+            );
+            $pagesLive = $pages->setDataQueryParam(array(
+                'Versioned.mode' => 'stage',
+                'Versioned.stage' => 'Live'
+            ))->exclude('ID', $pages->column('ID'));
 
             $tab = new Tab('ChildPages', $this->getLumberjackTitle(), $gridField);
+            if ($pagesLive->count() > 0)
+            {
+                // Allow user to items that have had their draft deleted but were not unpublished
+                // This issue should not occur in 3.2+ sites but occurs in 3.1 as deleting draft/unpublishing
+                // are seperate actions.
+                $gridFieldLive = new GridField(
+                    "ChildPagesLive",
+                    $this->getLumberjackTitle() . ' (Items to be deleted)',
+                    $pagesLive,
+                    $config = $this->getLumberjackGridFieldConfig()
+                );
+                $config->removeComponentsByType('GridFieldSiteTreeAddNewButton');
+                $tab->push($gridFieldLive);
+            }
             $fields->insertAfter($tab, 'Main');
         }
     }
