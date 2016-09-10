@@ -1,5 +1,8 @@
 <?php
 
+use SilverStripe\View\ArrayData;
+use SilverStripe\Forms\GridField\GridFieldEditButton;
+
 /**
  * Swaps the GridField Link out for the SiteTree edit link using {@link SiteTree::CMSEditLink()}.
  *
@@ -29,6 +32,6 @@ class GridFieldSiteTreeEditButton extends GridFieldEditButton
             'Link' => $record->CMSEditLink()
         ));
 
-        return $data->renderWith('GridFieldEditButton');
+        return $data->renderWith('SilverStripe\\Forms\\GridField\\GridFieldEditButton');
     }
 }
