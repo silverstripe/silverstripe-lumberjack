@@ -1,5 +1,15 @@
 <?php
 
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Core\ClassInfo;
+use SilverStripe\Control\Controller;
+use SilverStripe\Admin\LeftAndMain;
+use SilverStripe\CMS\Model\SiteTreeExtension;
+
 /**
  * Class Lumberjack
  *

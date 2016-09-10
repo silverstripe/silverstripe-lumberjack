@@ -1,5 +1,10 @@
 <?php
 
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Dev\TestOnly;
+
 class LumberjackTest extends SapphireTest
 {
 
@@ -19,7 +24,7 @@ class LumberjackTest extends SapphireTest
         $excluded = $this->filteredClassNames($excluded, $this->extraDataObjects);
         $this->assertEquals($excluded, array('SiteTree_LumberjackHidden' => 'SiteTree_LumberjackHidden'));
 
-        Config::inst()->update('SiteTree', 'show_in_sitetree', false);
+        Config::inst()->update('SilverStripe\\CMS\\Model\\SiteTree', 'show_in_sitetree', false);
         $excluded = $standard->getExcludedSiteTreeClassNames();
         $excluded = $this->filteredClassNames($excluded, $this->extraDataObjects);
         $this->assertEquals($excluded, array(

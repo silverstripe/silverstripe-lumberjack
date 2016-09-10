@@ -1,5 +1,20 @@
 <?php
 
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Control\Controller;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\HiddenField;
+use SilverStripe\Forms\GridField\GridField_FormAction;
+use SilverStripe\View\ArrayData;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\View\Requirements;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Control\Director;
+use SilverStripe\Forms\GridField\GridFieldAddNewButton;
+use SilverStripe\Forms\GridField\GridField_ActionProvider;
+
 /**
  * This component creates a dropdown of possible page types and a button to create a new page.
  *
@@ -116,7 +131,7 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
         if ($actionName == "add") {
-            $tmpData = json_decode($data['ChildPages']['GridState'], true);
+            $tmpData = json_decode($data['ChildPages']['SilverStripe\\Forms\\GridField\\GridState'], true);
             $tmpData = $tmpData['GridFieldSiteTreeAddNewButton'];
 
             $data = array(
@@ -124,7 +139,7 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton
                 "PageType" => $tmpData['pageType']
             );
 
-            $controller = Injector::inst()->create("CMSPageAddController");
+            $controller = Injector::inst()->create("SilverStripe\\CMS\\Controllers\\CMSPageAddController");
 
             $form = $controller->AddForm();
             $form->loadDataFrom($data);

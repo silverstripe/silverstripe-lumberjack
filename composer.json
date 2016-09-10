@@ -3,10 +3,10 @@
 	"description": "A module to make managing pages in a GridField easy without losing any of the functionality that you're used to in the CMS.",
 	"type": "silverstripe-module",
 	"require": {
-		"silverstripe/cms": ">=3.1.0"
+		"silverstripe/cms": "^4"
 	},
 	"require-dev": {
-		"phpunit/PHPUnit": "~3.7@stable"
+		"phpunit/PHPUnit": "^4@stable"
 	},
 	"license": "BSD-2-Clause",
 	"authors": [
@@ -14,5 +14,10 @@
 			"name": "Michael Strong",
 			"email": "mstrong@silverstripe.org"
 		}
-	]
+	],
+	"extra": {
+		"branch-alias": {
+			"dev-master": "2.x-dev"
+		}
+	}
 }
