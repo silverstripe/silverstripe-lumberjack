@@ -16,14 +16,15 @@ class Lumberjack extends SiteTreeExtension
     /**
      * Loops through subclasses of the owner (intended to be SiteTree) and checks if they've been hidden.
      *
+     * @var bool $allowSiteTreeVisibility       whether to allow both gridfield and site tree visibility
      * @return array
      **/
-    public function getExcludedSiteTreeClassNames()
+    public function getExcludedSiteTreeClassNames($allowSiteTreeVisibility = false)
     {
         $classes = array();
         $siteTreeClasses = $this->owner->allowedChildren();
         foreach ($siteTreeClasses as $class) {
-            if (Config::inst()->get($class, 'show_in_sitetree') === false) {
+            if ((Config::inst()->get($class, 'show_in_sitetree') === false) || ($allowSiteTreeVisibility && Config::inst()->get($class, 'show_in_lumberjack'))) {
                 $classes[$class] = $class;
             }
         }
@@ -38,7 +39,7 @@ class Lumberjack extends SiteTreeExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $excluded = $this->owner->getExcludedSiteTreeClassNames();
+        $excluded = $this->owner->getExcludedSiteTreeClassNames(true);
         if (!empty($excluded)) {
             $pages = $this->getLumberjackPagesForGridfield($excluded);
             $gridField = new GridField(

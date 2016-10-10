@@ -71,4 +71,13 @@ the `SiteTree` or `Page` class.
 	
 
 
+It is possible to keep the page in the site tree and display it in Lumberjack's gridfield using the `show_in_lumberjack` config option.
 
+    :::yaml
+
+    BlogHolder:
+      extensions:
+        - 'Lumberjack'
+
+    BlogEntry:
+      show_in_lumberjack: true
