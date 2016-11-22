@@ -37,10 +37,10 @@ class Lumberjack extends SiteTreeExtension {
 	public function updateCMSFields(FieldList $fields) {
 		$excluded = $this->owner->getExcludedSiteTreeClassNames();
 		if(!empty($excluded)) {
-			$pages = SiteTree::get()->filter(array(
+			$pages = CMSSiteTreeFilter_DeletedPages::create(array(
+				'ClassName' => $excluded,
 				'ParentID' => $this->owner->ID,
-				'ClassName' => $excluded
-			));
+			))->getFilteredPages();
 			$gridField = new GridField(
 				"ChildPages",
 				$this->getLumberjackTitle(),
