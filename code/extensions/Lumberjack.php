@@ -116,7 +116,7 @@ class Lumberjack extends SiteTreeExtension {
 	 * @return string
 	 */
 	protected function getLumberjackTitle() {
-		if(method_exists($this->owner, 'getLumberjackTitle')) {
+		if($this->owner->hasMethod('getLumberjackTitle')) {
 			return $this->owner->getLumberjackTitle();
 		}
 		return _t("Lumberjack.TabTitle", "Child Pages");
@@ -129,7 +129,7 @@ class Lumberjack extends SiteTreeExtension {
 	 * @return GridFieldConfig
 	 */
 	protected function getLumberjackGridFieldConfig() {
-		if(method_exists($this->owner, 'getLumberjackGridFieldConfig')) {
+		if($this->owner->hasMethod('getLumberjackGridFieldConfig')) {
 			return $this->owner->getLumberjackGridFieldConfig();
 		}
 		return GridFieldConfig_Lumberjack::create();
