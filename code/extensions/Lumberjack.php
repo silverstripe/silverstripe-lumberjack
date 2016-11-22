@@ -35,30 +35,48 @@ class Lumberjack extends SiteTreeExtension {
 	 * @param FieldList $fields
 	 */
 	public function updateCMSFields(FieldList $fields) {
-		$excluded = $this->owner->getExcludedSiteTreeClassNames();
-		if(!empty($excluded)) {
-			$pages = SiteTree::get()->filter(array(
-				'ParentID' => $this->owner->ID,
-				'ClassName' => $excluded
-			));
+		$childPages = $this->getLumberjackChildPages();
+
+		if($childPages !== null) {
 			$gridField = new GridField(
-				"ChildPages",
+				'ChildPages',
 				$this->getLumberjackTitle(),
-				$pages,
+				$childPages,
 				$this->getLumberjackGridFieldConfig()
 			);
 
 			$tab = new Tab('ChildPages', $this->getLumberjackTitle(), $gridField);
+
 			$fields->insertAfter($tab, 'Main');
 		}
 	}
 
+	/**
+	 * @return null|DataList
+	 */
+	protected function getLumberjackChildPages() {
+		if(method_exists($this->owner, 'getLumberjackChildPages')) {
+			return $this->owner->getLumberjackChildPages();
+		}
+
+		$excluded = $this->owner->getExcludedSiteTreeClassNames();
+
+		if(!empty($excluded)) {
+			return SiteTree::get()->filter(array(
+				'ParentID' => $this->owner->ID,
+				'ClassName' => $excluded
+			));
+		}
+
+		return null;
+	}
 
 	/**
 	 * Augments (@link Hierarchy::stageChildren()}
 	 *
 	 * @param boolean showAll Include all of the elements, even those not shown in the menus.
 	 *   (only applicable when extension is applied to {@link SiteTree}).
+	 *
 	 * @return DataList
 	 */
 	public function stageChildren($showAll = false) {
@@ -85,6 +103,7 @@ class Lumberjack extends SiteTreeExtension {
 	 * @param boolean $showAll Include all of the elements, even those not shown in the menus.
 	 *   (only applicable when extension is applied to {@link SiteTree}).
 	 * @param boolean $onlyDeletedFromStage Only return items that have been deleted from stage
+	 *
 	 * @return SS_List
 	 */
 	public function liveChildren($showAll = false, $onlyDeletedFromStage = false) {
