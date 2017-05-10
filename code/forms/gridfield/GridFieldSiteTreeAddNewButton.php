@@ -30,7 +30,7 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton
         $allowedChildren = $parent->allowedChildren();
         $children = array();
         foreach ($allowedChildren as $class) {
-            if (Config::inst()->get($class, "show_in_sitetree") === false) {
+            if (!Config::inst()->get($class, "show_in_sitetree")) {
                 $instance = Injector::inst()->get($class);
                 // Note: Second argument to SiteTree::canCreate will support inherited permissions
                 // post 3.1.12, and will default to the old permission model in 3.1.11 or below
