@@ -119,7 +119,7 @@ class Lumberjack extends SiteTreeExtension
      */
     protected function getLumberjackTitle()
     {
-        if (method_exists($this->owner, 'getLumberjackTitle')) {
+        if ($this->owner->hasMethod('getLumberjackTitle')) {
             return $this->owner->getLumberjackTitle();
         }
         return _t("Lumberjack.TabTitle", "Child Pages");
