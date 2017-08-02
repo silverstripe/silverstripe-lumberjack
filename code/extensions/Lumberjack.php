@@ -23,7 +23,7 @@ class Lumberjack extends SiteTreeExtension
         $classes = array();
         $siteTreeClasses = $this->owner->allowedChildren();
         foreach ($siteTreeClasses as $class) {
-            if (Config::inst()->get($class, 'show_in_sitetree') === false) {
+            if (!Config::inst()->get($class, 'show_in_sitetree')) {
                 $classes[$class] = $class;
             }
         }
