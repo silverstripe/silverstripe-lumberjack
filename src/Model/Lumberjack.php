@@ -100,7 +100,7 @@ class Lumberjack extends SiteTreeExtension
         }
 
         $this->owner->extend("augmentStageChildren", $staged, $showAll);
-        $this->excludeSiteTreeClassNames($staged);
+        $staged = $this->excludeSiteTreeClassNames($staged);
         return $staged;
     }
 
@@ -113,8 +113,9 @@ class Lumberjack extends SiteTreeExtension
         $classNames = $this->owner->getExcludedSiteTreeClassNames();
         if ($this->shouldFilter() && count($classNames)) {
             // Filter the SiteTree
-            $list->exclude('ClassName', $classNames);
+            $list = $list->exclude('ClassName', $classNames);
         }
+        return $list;
     }
 
     /**
@@ -156,7 +157,7 @@ class Lumberjack extends SiteTreeExtension
         if (!$showAll && DataObject::getSchema()->fieldSpec($this->owner, 'ShowInMenus')) {
             $children = $children->filter('ShowInMenus', 1);
         }
-        $this->excludeSiteTreeClassNames($children);
+        $children = $this->excludeSiteTreeClassNames($children);
 
         return $children;
     }
