@@ -107,6 +107,7 @@ class Lumberjack extends SiteTreeExtension
     /**
      * Excludes any hidden owner subclasses
      * @param DataList $list
+     * @return DataList
      */
     protected function excludeSiteTreeClassNames($list)
     {
