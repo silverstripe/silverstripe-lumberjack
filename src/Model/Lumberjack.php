@@ -105,7 +105,8 @@ class Lumberjack extends SiteTreeExtension
     }
 
     /**
-     * Excludes any hidden owner subclasses
+     * Excludes any hidden owner subclasses. Note that the returned DataList will be a different
+     * instance from the original
      * @param DataList $list
      * @return DataList
      */
