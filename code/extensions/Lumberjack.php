@@ -47,8 +47,26 @@ class Lumberjack extends SiteTreeExtension
                 $pages,
                 $this->getLumberjackGridFieldConfig()
             );
+            $pagesLive = $pages->setDataQueryParam(array(
+                'Versioned.mode' => 'stage',
+                'Versioned.stage' => 'Live'
+            ))->exclude('ID', $pages->column('ID'));
 
             $tab = new Tab('ChildPages', $this->getLumberjackTitle(), $gridField);
+            if ($pagesLive->count() > 0)
+            {
+                // Allow user to items that have had their draft deleted but were not unpublished
+                // This issue should not occur in 3.2+ sites but occurs in 3.1 as deleting draft/unpublishing
+                // are seperate actions.
+                $gridFieldLive = new GridField(
+                    "ChildPagesLive",
+                    $this->getLumberjackTitle() . ' (Items to be deleted)',
+                    $pagesLive,
+                    $config = $this->getLumberjackGridFieldConfig()
+                );
+                $config->removeComponentsByType('GridFieldSiteTreeAddNewButton');
+                $tab->push($gridFieldLive);
+            }
             $fields->insertAfter($tab, 'Main');
         }
     }
