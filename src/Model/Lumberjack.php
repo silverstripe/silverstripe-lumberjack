@@ -9,8 +9,8 @@ use SilverStripe\CMS\Model\SiteTreeExtension;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\Tab;
+use SilverStripe\Lumberjack\Forms\GridField_Lumberjack;
 use SilverStripe\Lumberjack\Forms\GridFieldConfig_Lumberjack;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
@@ -57,7 +57,7 @@ class Lumberjack extends SiteTreeExtension
         $excluded = $this->owner->getExcludedSiteTreeClassNames();
         if (!empty($excluded)) {
             $pages = $this->getLumberjackPagesForGridfield($excluded);
-            $gridField = GridField::create(
+            $gridField = GridField_Lumberjack::create(
                 'ChildPages',
                 $this->getLumberjackTitle(),
                 $pages,
