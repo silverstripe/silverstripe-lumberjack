@@ -113,9 +113,6 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton implements Gri
         $forTemplate->Fields->push($pageTypes);
         $forTemplate->Fields->push($addAction);
 
-        Requirements::css('silverstripe/lumberjack:css/lumberjack.css');
-        Requirements::javascript('silverstripe/lumberjack:javascript/GridField.js');
-
         return [$this->targetFragment => $forTemplate->renderWith(__CLASS__)];
     }
 
