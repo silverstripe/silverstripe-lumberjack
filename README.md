@@ -92,3 +92,74 @@ SilverStripe\Blog\Model\Blog:
 SilverStripe\Blog\Model\BlogPost:
   show_in_sitetree: false
 ```
+
+## Use with SortableGridField
+
+Install [Sortable Grid Field](https://github.com/UndefinedOffset/SortableGridField) if you don't have it already.
+
+```bash
+composer require undefinedoffset/sortablegridfield
+```
+
+This example uses the same `NewsHolder` and `NewsArticle` pages from the usage example above.
+
+```php
+<?php
+
+namespace MyModule\PageTypes;
+
+use Page;
+use SilverStripe\Lumberjack\Model\Lumberjack;
+use SilverStripe\Lumberjack\Forms\GridFieldConfig_Lumberjack;
+use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
+
+class NewsHolder extends Page
+{
+    private static $extensions = [
+        Lumberjack::class,
+    ];
+
+    private static $allowed_children = [
+        NewsArticle::class
+    ];
+
+    private static $owns = ['Children'];
+
+    public function getLumberjackGridFieldConfig()
+    {
+        $gridfield = new GridFieldConfig_Lumberjack(10); // 10 per page
+        $gridfield->addComponent(new GridFieldSortableRows('SortOrder'));
+        return $gridfield;
+    }
+
+    public function getLumberjackPagesForGridfield($excluded = array())
+    {
+        return NewsArticle::get()->filter([
+            'ParentID' => $this->owner->ID,
+            'ClassName' => $excluded,
+        ]);
+    }
+}
+```
+
+```php
+<?php
+
+namespace MyModule\PageTypes;
+
+use Page;
+
+class NewsArticle extends Page
+{
+    private static $db = [
+        'SortOrder' => 'Int'
+    ];
+
+    private static $indexes = [
+        'SortOrder' => true
+    ];
+
+    private static $show_in_sitetree = false;
+    private static $allowed_children = [];
+}
+```
