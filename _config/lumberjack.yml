@@ -3,6 +3,6 @@ name: lumberjack
 ---
 SilverStripe\Admin\LeftAndMain:
   extra_requirements_css:
-    - silverstripe/lumberjack:css/lumberjack.css
+    - silverstripe/lumberjack:client/dist/styles/lumberjack.css
   extra_requirements_javascript:
-    - silverstripe/lumberjack:javascript/GridField.js
+    - silverstripe/lumberjack:client/dist/js/GridField.js

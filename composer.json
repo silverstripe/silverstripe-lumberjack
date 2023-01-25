@@ -13,8 +13,7 @@
     },
     "extra": {
         "expose": [
-            "css",
-            "javascript"
+            "client/dist"
         ]
     },
     "autoload": {
