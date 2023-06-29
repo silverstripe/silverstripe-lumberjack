@@ -1,4 +1,5 @@
 /* global jQuery */
+// eslint-disable-next-line func-names
 (function ($) {
   // eslint-disable-next-line no-shadow
   $.entwine('ss', ($) => {
@@ -10,7 +11,7 @@
 
         state.pageType = this.val();
         gridField.setState('GridFieldSiteTreeAddNewButton', state);
-      }
+      },
     });
   });
 }(jQuery));
