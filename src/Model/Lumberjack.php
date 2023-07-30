@@ -175,7 +175,7 @@ class Lumberjack extends SiteTreeExtension
      */
     protected function getLumberjackTitle()
     {
-        if ($this->getOwner()->hasMethod('getLumberjackTitle')) {
+        if (method_exists($this->owner, 'getLumberjackTitle')) {
             return $this->owner->getLumberjackTitle();
         }
 
@@ -189,7 +189,7 @@ class Lumberjack extends SiteTreeExtension
      */
     protected function getLumberjackGridFieldConfig()
     {
-        if ($this->getOwner()->hasMethod('getLumberjackGridFieldConfig')) {
+        if (method_exists($this->owner, 'getLumberjackGridFieldConfig')) {
             return $this->owner->getLumberjackGridFieldConfig();
         }
 
@@ -227,7 +227,7 @@ class Lumberjack extends SiteTreeExtension
      */
     public function getLumberjackPagesForGridfield($excluded = array())
     {
-        if ($this->getOwner()->hasMethod('getLumberjackPagesForGridfield')) {
+        if (method_exists($this->owner, 'getLumberjackPagesForGridfield')) {
             return $this->owner->getLumberjackPagesForGridfield($excluded);
         }
 
