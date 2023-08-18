@@ -1,14 +1,4 @@
 de:
-  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeAddNewButton:
-    Add: 'Neuen {name} hinzufügen'
-    AddMultipleOptions: 'Neuen hinzufügen'
-  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState:
-    Draft: 'Als Entwurf am {date} gespeichert'
-    Modified: Geändert
-    Published: 'Veröffentlicht am {date}'
-    StateTitle: Status
-  SilverStripe\Lumberjack\Model\Lumberjack:
-    TabTitle: Unterseiten
   GridFieldSiteTreeAddNewButton:
     Add: 'Neuen {name} hinzufügen'
     AddMultipleOptions: 'Neuen hinzufügen'
@@ -18,4 +8,14 @@ de:
     Published: '<i class="btn-icon gridfield-icon btn-icon-accept"></i> Veröffentlicht am {date}'
     StateTitle: Status
   Lumberjack:
+    TabTitle: Unterseiten
+  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeAddNewButton:
+    Add: 'Neuen {name} hinzufügen'
+    AddMultipleOptions: 'Neuen hinzufügen'
+  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState:
+    Draft: 'Als Entwurf am {date} gespeichert'
+    Modified: Geändert
+    Published: 'Veröffentlicht am {date}'
+    StateTitle: Status
+  SilverStripe\Lumberjack\Model\Lumberjack:
     TabTitle: Unterseiten

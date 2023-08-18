@@ -1,12 +1,4 @@
 fa_IR:
-  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeAddNewButton:
-    Add: 'افزودن {name} جدید'
-    AddMultipleOptions: 'افزودن جدید'
-  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState:
-    Modified: 'اصلاح شده'
-    StateTitle: وضیعت
-  SilverStripe\Lumberjack\Model\Lumberjack:
-    TabTitle: 'صفحات زیرین'
   GridFieldSiteTreeAddNewButton:
     Add: 'افزودن {name} جدید'
     AddMultipleOptions: 'افزودن جدید'
@@ -14,4 +6,12 @@ fa_IR:
     Modified: 'اصلاح شده'
     StateTitle: وضیعت
   Lumberjack:
+    TabTitle: 'صفحات زیرین'
+  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeAddNewButton:
+    Add: 'افزودن {name} جدید'
+    AddMultipleOptions: 'افزودن جدید'
+  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState:
+    Modified: 'اصلاح شده'
+    StateTitle: وضیعت
+  SilverStripe\Lumberjack\Model\Lumberjack:
     TabTitle: 'صفحات زیرین'

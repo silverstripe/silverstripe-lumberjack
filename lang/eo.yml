@@ -1,14 +1,4 @@
 eo:
-  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeAddNewButton:
-    Add: 'Enmeti novan {name}'
-    AddMultipleOptions: 'Enmeti novan'
-  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState:
-    Draft: 'Konservita kiel malneta je {date}'
-    Modified: Ŝanĝita
-    Published: 'Publikigita je {date}'
-    StateTitle: Stato
-  SilverStripe\Lumberjack\Model\Lumberjack:
-    TabTitle: 'Idoj de paĝoj'
   GridFieldSiteTreeAddNewButton:
     Add: 'Enmeti novan {name}'
     AddMultipleOptions: 'Enmeti novan'
@@ -18,4 +8,14 @@ eo:
     Published: '<i class="btn-icon gridfield-icon btn-icon-accept"></i> publikiĝis je {date}'
     StateTitle: Stato
   Lumberjack:
+    TabTitle: 'Idoj de paĝoj'
+  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeAddNewButton:
+    Add: 'Enmeti novan {name}'
+    AddMultipleOptions: 'Enmeti novan'
+  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState:
+    Draft: 'Konservita kiel malneta je {date}'
+    Modified: Ŝanĝita
+    Published: 'Publikigita je {date}'
+    StateTitle: Stato
+  SilverStripe\Lumberjack\Model\Lumberjack:
     TabTitle: 'Idoj de paĝoj'

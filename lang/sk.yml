@@ -1,14 +1,4 @@
 sk:
-  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeAddNewButton:
-    Add: 'Pridať {name}'
-    AddMultipleOptions: Pridať
-  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState:
-    Draft: 'Uložený ako koncept: {date}'
-    Modified: zmenené
-    Published: 'Publikovaný: {date}'
-    StateTitle: Stav
-  SilverStripe\Lumberjack\Model\Lumberjack:
-    TabTitle: Podstránky
   GridFieldSiteTreeAddNewButton:
     Add: 'Pridať {name}'
     AddMultipleOptions: Pridať
@@ -18,4 +8,14 @@ sk:
     Published: '<i class="btn-icon gridfield-icon btn-icon-accept"></i> Publikovaný: {date}'
     StateTitle: Stav
   Lumberjack:
+    TabTitle: Podstránky
+  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeAddNewButton:
+    Add: 'Pridať {name}'
+    AddMultipleOptions: Pridať
+  SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState:
+    Draft: 'Uložený ako koncept: {date}'
+    Modified: zmenené
+    Published: 'Publikovaný: {date}'
+    StateTitle: Stav
+  SilverStripe\Lumberjack\Model\Lumberjack:
     TabTitle: Podstránky
