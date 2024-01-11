@@ -25,6 +25,8 @@ use SilverStripe\Versioned\Versioned;
  * @subpackage lumberjack
  *
  * @author Michael Strong <mstrong@silverstripe.org>
+ *
+ * @extends SiteTreeExtension<SiteTree&static>
  */
 class Lumberjack extends SiteTreeExtension
 {
@@ -76,7 +78,7 @@ class Lumberjack extends SiteTreeExtension
      *
      * @param bool $showAll Include all of the elements, even those not shown in the menus. Only applicable when
      *                      extension is applied to {@link SiteTree}.
-     * @return DataList
+     * @return DataList<SiteTree>
      */
     public function stageChildren($showAll = false)
     {
@@ -111,7 +113,7 @@ class Lumberjack extends SiteTreeExtension
      * instance from the original.
      *
      * @param DataList $list
-     * @return DataList
+     * @return DataList<SiteTree>
      */
     protected function excludeSiteTreeClassNames($list)
     {
@@ -129,7 +131,7 @@ class Lumberjack extends SiteTreeExtension
      * @param bool $showAll              Include all of the elements, even those not shown in the menus. Only
      *                                   applicable when extension is applied to {@link SiteTree}.
      * @param bool $onlyDeletedFromStage Only return items that have been deleted from stage
-     * @return DataList
+     * @return DataList<SiteTree>
      * @throws Exception
      */
     public function liveChildren($showAll = false, $onlyDeletedFromStage = false)
@@ -223,7 +225,7 @@ class Lumberjack extends SiteTreeExtension
      * This also allows the owner class to override this method, e.g. to provide custom ordering.
      *
      * @var array $excluded     List of class names excluded from the SiteTree
-     * @return DataList
+     * @return DataList<SiteTree>
      */
     public function getLumberjackPagesForGridfield($excluded = array())
     {

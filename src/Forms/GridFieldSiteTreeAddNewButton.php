@@ -151,7 +151,6 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton implements Gri
                 'PageType' => $tmpData['pageType']
             );
 
-            /** @var $controller CMSPageAddController */
             $controller = Injector::inst()->create(CMSPageAddController::class);
 
             // pass current request to newly created controller
