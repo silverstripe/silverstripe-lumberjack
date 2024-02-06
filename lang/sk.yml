@@ -13,9 +13,9 @@ sk:
     Add: 'Pridať {name}'
     AddMultipleOptions: Pridať
   SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState:
-    Draft: 'Uložený ako koncept: {date}'
+    Draft: 'Uložené ako koncept dňa {date}'
     Modified: zmenené
-    Published: 'Publikovaný: {date}'
+    Published: 'Zverejnené dňa {date}'
     StateTitle: Stav
   SilverStripe\Lumberjack\Model\Lumberjack:
     TabTitle: Podstránky
