@@ -13,7 +13,7 @@ de:
     Add: 'Neuen {name} hinzufügen'
     AddMultipleOptions: 'Neuen hinzufügen'
   SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState:
-    Draft: 'Als Entwurf am {date} gespeichert'
+    Draft: 'Als Entwurf gespeichert am {date}'
     Modified: Geändert
     Published: 'Veröffentlicht am {date}'
     StateTitle: Status
