@@ -5,9 +5,9 @@ namespace SilverStripe\Lumberjack\Model;
 use Exception;
 use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\CMS\Model\SiteTreeExtension;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldViewButton;
@@ -30,7 +30,7 @@ use SilverStripe\Versioned\Versioned;
  *
  * @extends SiteTreeExtension<SiteTree&static>
  */
-class Lumberjack extends SiteTreeExtension
+class Lumberjack extends Extension
 {
     /**
      * Loops through subclasses of the owner (intended to be SiteTree) and checks if they've been hidden.
