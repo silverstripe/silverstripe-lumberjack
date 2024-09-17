@@ -3,7 +3,7 @@
 namespace SilverStripe\Lumberjack\Forms;
 
 use SilverStripe\Forms\GridField\GridFieldViewButton;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 
 class GridFieldSiteTreeViewButton extends GridFieldViewButton
 {
