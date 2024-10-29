@@ -16,7 +16,7 @@ use SilverStripe\Lumberjack\Forms\GridFieldConfig_Lumberjack;
 use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeViewButton;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Versioned\Mode\Versioned;
 
 /**
  * Class Lumberjack
