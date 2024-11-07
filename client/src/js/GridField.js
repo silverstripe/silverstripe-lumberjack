@@ -8,7 +8,7 @@
         const gridField = this.getGridField();
         const state = gridField.getState().GridFieldSiteTreeAddNewButton;
 
-        state.pageType = this.val();
+        state.recordType = this.val();
         gridField.setState('GridFieldSiteTreeAddNewButton', state);
       }
     });
