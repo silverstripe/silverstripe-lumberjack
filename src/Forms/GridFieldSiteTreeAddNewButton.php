@@ -2,10 +2,11 @@
 
 namespace SilverStripe\Lumberjack\Forms;
 
-use SilverStripe\CMS\Controllers\CMSPageAddController;
+use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\DropdownField;
@@ -42,7 +43,8 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton implements Gri
             return array();
         }
 
-        $nonHiddenPageTypes = SiteTree::page_type_classes();
+        $nonHiddenPageTypes = ClassInfo::getValidSubClasses(SiteTree::class);
+        SiteTree::singleton()->updateAllowedSubClasses($nonHiddenPageTypes);
         $allowedChildren = $parent->allowedChildren();
         $children = array();
         foreach ($allowedChildren as $class) {
@@ -69,19 +71,19 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton implements Gri
         $parent = SiteTree::get()->byId(Controller::curr()->currentRecordID());
 
         if ($parent) {
-            $state->currentPageID = $parent->ID;
+            $state->currentRecordID = $parent->ID;
         }
 
         $children = $this->getAllowedChildren($parent);
         if (empty($children)) {
             return array();
         } elseif (count($children ?? []) > 1) {
-            $pageTypes = DropdownField::create('PageType', 'Page Type', $children, $parent->defaultChild());
+            $pageTypes = DropdownField::create('RecordType', 'Page Type', $children, $parent->defaultChild());
             $pageTypes
                 ->setFieldHolderTemplate(__CLASS__ . '_holder')
                 ->addExtraClass('gridfield-dropdown no-change-track');
 
-            $state->pageType = $parent->defaultChild();
+            $state->RecordType = $parent->defaultChild();
 
             if (!$this->buttonName) {
                 $this->buttonName = _t(
@@ -92,9 +94,9 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton implements Gri
             }
         } else {
             $keys = array_keys($children ?? []);
-            $pageTypes = HiddenField::create('PageType', 'Page Type', $keys[0]);
+            $pageTypes = HiddenField::create('RecordType', 'Page Type', $keys[0]);
 
-            $state->pageType = $keys[0];
+            $state->recordType = $keys[0];
 
             if (!$this->buttonName) {
                 $this->buttonName = _t(
@@ -131,7 +133,7 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton implements Gri
     }
 
     /**
-     * Handles the add action, but only acts as a wrapper for {@link CMSPageAddController::doAdd()}
+     * Handles the add action, but only acts as a wrapper for CMSMain
      *
      * @param GridField $gridField
      * @param string $actionName
@@ -147,20 +149,20 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton implements Gri
             $tmpData = $tmpData['GridFieldSiteTreeAddNewButton'];
 
             $data = array(
-                'ParentID' => $tmpData['currentPageID'],
-                'PageType' => $tmpData['pageType']
+                'ParentID' => $tmpData['currentRecordID'],
+                'RecordType' => $tmpData['recordType']
             );
 
-            $controller = Injector::inst()->create(CMSPageAddController::class);
+            $controller = Injector::inst()->create(CMSMain::class);
+            $form = $controller->AddForm();
 
-            // pass current request to newly created controller
+            // pass current request down in case either of these needs it
             $request = Controller::curr()->getRequest();
             $controller->setRequest($request);
+            $form->getRequestHandler()->setRequest($request);
 
-            $form = $controller->AddForm();
             $form->loadDataFrom($data);
-
-            return $controller->doAdd($data, $form);
+            return $form->doAdd($data, $form);
         }
 
         return null;
