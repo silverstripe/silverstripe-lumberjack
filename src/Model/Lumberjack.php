@@ -28,7 +28,7 @@ use SilverStripe\Versioned\Versioned;
  *
  * @author Michael Strong <mstrong@silverstripe.org>
  *
- * @extends SiteTreeExtension<SiteTree&static>
+ * @extends Extension<SiteTree&static>
  */
 class Lumberjack extends Extension
 {
