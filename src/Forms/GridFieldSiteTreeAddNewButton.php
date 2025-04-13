@@ -66,7 +66,10 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton implements Gri
     {
         $state = $gridField->State->GridFieldSiteTreeAddNewButton;
 
-        $parent = SiteTree::get()->byId(Controller::curr()->currentRecordID());
+        $request = Controller::curr()->getRequest();
+        $recordID = $request->param('ID');
+        
+        $parent = SiteTree::get()->byID($recordID);
 
         if ($parent) {
             $state->currentPageID = $parent->ID;
