@@ -1,0 +1,2 @@
+SilverStripe\CMS\Model\SiteTree:
+  tree_children_method: 'AllChildrenIncludingDeleted'

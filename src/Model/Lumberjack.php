@@ -14,6 +14,7 @@ use SilverStripe\Forms\GridField\GridFieldViewButton;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Lumberjack\Forms\GridFieldConfig_Lumberjack;
 use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeViewButton;
+use SilverStripe\Model\List\SS_List;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
@@ -120,11 +121,19 @@ class Lumberjack extends Extension
     }
 
     /**
+     * @param mixed $includeDeleted @deprecated - this parameter is unused and will be removed in a future major release
+     */
+    protected function updateGetChildrenForTree(mixed $includeDeleted, SS_List &$children): void
+    {
+        $children = $this->excludeSiteTreeClassNames($children);
+    }
+
+    /**
      * Excludes any hidden owner subclasses. Note that the returned DataList will be a different
      * instance from the original.
      *
-     * @param DataList $list
-     * @return DataList<SiteTree>
+     * @param SS_List $list
+     * @return SS_List<SiteTree>
      */
     protected function excludeSiteTreeClassNames($list)
     {
