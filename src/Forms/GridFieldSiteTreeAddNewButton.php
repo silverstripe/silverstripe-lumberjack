@@ -110,8 +110,8 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton implements Gri
 
         $addAction = GridField_FormAction::create($gridField, 'add', $this->buttonName, 'add', 'add');
         $addAction
-            ->setAttribute('data-icon', 'add')
-            ->addExtraClass('no-ajax btn btn-primary font-icon-plus');
+            ->setIcon('add')
+            ->addExtraClass('no-ajax btn btn-primary');
 
         $forTemplate = ArrayData::create();
         $forTemplate->Fields = ArrayList::create();

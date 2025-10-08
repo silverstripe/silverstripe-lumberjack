@@ -47,7 +47,7 @@ class GridFieldSiteTreeState implements GridField_ColumnProvider
 
                 $published = $record->isPublished();
                 if (!$published) {
-                    return '<i class="font-icon-pencil btn--icon-md"></i>' .  _t(
+                    return '<span class="font-icon-pencil btn--icon-md" aria-hidden="true"></span>' .  _t(
                         __CLASS__ . '.Draft',
                         'Saved as Draft on {date}',
                         'State for when a post is saved.',
@@ -56,7 +56,7 @@ class GridFieldSiteTreeState implements GridField_ColumnProvider
                         )
                     );
                 }
-                return '<i class="font-icon-check-mark-circle btn--icon-md"></i>' . _t(
+                return '<span class="font-icon-check-mark-circle btn--icon-md" aria-hidden="true"></span>' . _t(
                     __CLASS__ . '.Published',
                     'Published on {date}',
                     'State for when a post is published.',
