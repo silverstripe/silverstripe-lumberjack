@@ -83,7 +83,7 @@ class GridFieldSiteTreeAddNewButton extends GridFieldAddNewButton implements Gri
                 ->setFieldHolderTemplate(__CLASS__ . '_holder')
                 ->addExtraClass('gridfield-dropdown no-change-track');
 
-            $state->RecordType = $parent->defaultChild();
+            $state->recordType = $parent->defaultChild();
 
             if (!$this->buttonName) {
                 $this->buttonName = _t(
