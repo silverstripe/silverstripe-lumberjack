@@ -16,7 +16,7 @@
     }
   }
 
-  .gridfield-icon i {
+  .gridfield-icon [class*="font-icon-"] {
     width: 16px;
     height: 16px;
     display: block;
@@ -24,7 +24,7 @@
     margin-right: 6px;
   }
 
-  .gridfield-icon.published i {
+  .gridfield-icon.published [class*="font-icon-"] {
     color: #3fa142;
   }
 
